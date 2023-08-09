@@ -26,4 +26,10 @@ export default CustomInput;
 CustomInput.propTypes = {
   type: PropTypes.string,
   label: PropTypes.string,
+  i_id: PropTypes.string,
+  i_class: PropTypes.string,
+  name: PropTypes.string,
+  val: PropTypes.string || PropTypes.number,
+  onCh: PropTypes.func,
+  onBl: PropTypes.func,
 };

@@ -7,8 +7,7 @@ const getColors = async () => {
 };
 
 const colorsService = {
-  getColors
+  getColors,
 };
 
 export default colorsService;
-
