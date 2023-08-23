@@ -8,7 +8,10 @@ import { toast } from "react-toastify";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { getBlogCategories } from "../features/bcategory/bcategorySlice";
+import {
+  getBlogCategories,
+  resetState,
+} from "../features/bcategory/bcategorySlice";
 import { createBlog } from "../features/blogs/blogSlice";
 import Dropzone from "react-dropzone";
 import { delImg, uploadImg } from "../features/upload/uploadSlice";
@@ -66,6 +69,7 @@ const Addblog = () => {
       dispatch(createBlog(values));
       formik.resetForm();
       setTimeout(() => {
+        dispatch(resetState());
         navigate("/admin/blog-list");
       }, 3000);
     },

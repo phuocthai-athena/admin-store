@@ -1,11 +1,14 @@
-import React, { useEffect }  from "react";
+import React, { useEffect } from "react";
 import CustomInput from "../components/CustomInput";
-import { useDispatch,useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as yup from "yup";
 import { useFormik } from "formik";
-import { createPCategory } from "../features/pcategory/pcategorySlice";
+import {
+  createPCategory,
+  resetState,
+} from "../features/pcategory/pcategorySlice";
 
 let schema = yup.object().shape({
   title: yup.string().required("Category Name is Required"),
@@ -37,6 +40,7 @@ const Addcat = () => {
       formik.resetForm();
 
       setTimeout(() => {
+        dispatch(resetState());
         navigate("/admin/list-category");
       }, 3000);
     },

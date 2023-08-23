@@ -15,6 +15,8 @@ import Categorylist from "./pages/Categorylist";
 import Addcolor from "./pages/Addcolor";
 import Colorlist from "./pages/Colorlist";
 import Orders from "./pages/Orders";
+import AddCoupon from "./pages/AddCoupon";
+import CouponList from "./pages/CouponList";
 import Addblog from "./pages/Addblog";
 import Bloglist from "./pages/Bloglist";
 import Addblogcat from "./pages/Addblogcat";
@@ -42,6 +44,8 @@ function App() {
           <Route path="color" element={<Addcolor />} />
           <Route path="list-color" element={<Colorlist />} />
           <Route path="orders" element={<Orders />} />
+          <Route path="coupon" element={<AddCoupon />} />
+          <Route path="list-coupon" element={<CouponList />} />
           <Route path="blog" element={<Addblog />} />
           <Route path="blog-list" element={<Bloglist />} />
           <Route path="blog-category" element={<Addblogcat />} />
