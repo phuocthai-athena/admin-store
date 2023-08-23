@@ -5,7 +5,8 @@ import {
   AiOutlineUser,
   AiOutlineBgColors,
 } from "react-icons/ai";
-// import { ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { ImBlog } from "react-icons/im";
 import { Layout, Menu, theme } from "antd";
 import { RiCouponLine } from "react-icons/ri";
@@ -16,7 +17,6 @@ import { useNavigate, Outlet, Link } from "react-router-dom";
 import { FaClipboardList, FaBloggerB } from "react-icons/fa";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 
-// import "react-toastify/dist/ReactToastify.css";
 
 const { Header, Sider, Content } = Layout;
 
@@ -232,7 +232,7 @@ const MainLayout = () => {
             background: colorBgContainer,
           }}
         >
-          {/* <ToastContainer
+          <ToastContainer
             position="top-right"
             autoClose={250}
             hideProgressBar={false}
@@ -242,7 +242,8 @@ const MainLayout = () => {
             pauseOnFocusLoss
             draggable
             theme="light"
-          /> */}
+          />
+
           <Outlet />
         </Content>
       </Layout>
