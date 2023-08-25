@@ -70,3 +70,4 @@ const CouponList = () => {
 };
 
 export default CouponList;
+

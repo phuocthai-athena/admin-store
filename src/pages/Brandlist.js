@@ -1,10 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { Link } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { getBrands } from "../features/brand/brandSlice";
+import {
+  getBrands,
+  resetState,
+  deleteBrand,
+} from "../features/brand/brandSlice";
+import CustomModal from "../components/CustomModal";
 
 const columns = [
   {
@@ -23,8 +28,22 @@ const columns = [
 ];
 
 const Brandlist = () => {
+  
+  const [open, setOpen] = useState(false);
+  const [brandId, setBrandId] = useState("");
+  const showModal = (e) => {
+    setOpen(true);
+    setBrandId(e);
+  };
+
+  const hideModal = () => {
+    setOpen(false);
+  };
+
   const dispatch = useDispatch();
+
   useEffect(() => {
+    dispatch(resetState());
     dispatch(getBrands());
   }, []);
 
@@ -36,16 +55,31 @@ const Brandlist = () => {
       name: brandState[i].title,
       action: (
         <>
-          <Link className="fs-3 text-danger" to="/">
+          <Link
+            to={`/admin/brand/${brandState[i]._id}`}
+            className="fs-3 text-danger"
+          >
             <BiEdit />
           </Link>
-          <Link className="ms-3 fs-3 text-danger" to="/">
+          <button
+            onClick={() => showModal(brandState[i]._id)}
+            className="ms-3 fs-3 text-danger bg-transparent border-0"
+          >
             <AiFillDelete />
-          </Link>
+          </button>
         </>
       ),
     });
   }
+
+  const deleteABrand = (e) => {
+    dispatch(deleteBrand(e));
+
+    setOpen(false);
+    setTimeout(() => {
+      dispatch(getBrands());
+    }, 1000);
+  };
 
   return (
     <div>
@@ -53,6 +87,14 @@ const Brandlist = () => {
       <div>
         <Table columns={columns} dataSource={data1} />
       </div>
+      <CustomModal
+         hideModal={hideModal}
+        open={open}
+        performAction={() => {
+          deleteABrand(brandId);
+        }}
+        title="Are you sure that you want to delete this brand?"
+      ></CustomModal>
     </div>
   );
 };
