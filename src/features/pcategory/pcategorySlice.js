@@ -23,6 +23,39 @@ export const createPCategory = createAsyncThunk(
   }
 );
 
+export const getPCategory = createAsyncThunk(
+  "productCategory/get-product-category",
+  async (id, thunkAPI) => {
+    try {
+      return await pCategoryService.getPCategory(id);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const updatePCategory = createAsyncThunk(
+  "productCategory/update-category",
+  async (pCategoryData, thunkAPI) => {
+    try {
+      return await pCategoryService.updatePCategory(pCategoryData);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const deletePCategory = createAsyncThunk(
+  "productCategory/delete-category",
+  async (id, thunkAPI) => {
+    try {
+      return await pCategoryService.deletePCategory(id);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 export const resetState = createAction("Reset_all");
 
 const initialState = {
@@ -64,6 +97,51 @@ export const pCategoriesSlice = createSlice({
         state.createdPCategory = action.payload;
       })
       .addCase(createPCategory.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
+      .addCase(getPCategory.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getPCategory.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.pCatName = action.payload.title;
+      })
+      .addCase(getPCategory.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
+      .addCase(updatePCategory.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updatePCategory.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.updatedPCat = action.payload;
+      })
+      .addCase(updatePCategory.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
+      .addCase(deletePCategory.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deletePCategory.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.deletedPCategory = action.payload;
+      })
+      .addCase(deletePCategory.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;

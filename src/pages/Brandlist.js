@@ -28,7 +28,6 @@ const columns = [
 ];
 
 const Brandlist = () => {
-  
   const [open, setOpen] = useState(false);
   const [brandId, setBrandId] = useState("");
   const showModal = (e) => {
@@ -88,7 +87,7 @@ const Brandlist = () => {
         <Table columns={columns} dataSource={data1} />
       </div>
       <CustomModal
-         hideModal={hideModal}
+        hideModal={hideModal}
         open={open}
         performAction={() => {
           deleteABrand(brandId);

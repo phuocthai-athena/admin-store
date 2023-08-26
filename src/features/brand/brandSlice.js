@@ -23,22 +23,22 @@ export const getBrand = createAsyncThunk(
   }
 );
 
-export const deleteBrand = createAsyncThunk(
-  "brand/delete-brand",
-  async (id, thunkAPI) => {
+export const updateBrand = createAsyncThunk(
+  "brand/update-brand",
+  async (brand, thunkAPI) => {
     try {
-      return await brandService.deleteBrand(id);
+      return await brandService.updateBrand(brand);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
   }
 );
 
-export const updateBrand = createAsyncThunk(
-  "brand/update-brand",
-  async (brand, thunkAPI) => {
+export const deleteBrand = createAsyncThunk(
+  "brand/delete-brand",
+  async (id, thunkAPI) => {
     try {
-      return await brandService.updateBrand(brand);
+      return await brandService.deleteBrand(id);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
