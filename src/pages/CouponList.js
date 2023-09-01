@@ -1,10 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Table } from "antd";
 import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
-import { getCoupons } from "../features/coupon/couponSlice";
+import {
+  getCoupons,
+  resetState,
+  deleteCoupon,
+} from "../features/coupon/couponSlice";
+import CustomModal from "../components/CustomModal";
 
 const columns = [
   {
@@ -33,8 +38,20 @@ const columns = [
 ];
 
 const CouponList = () => {
+  const [open, setOpen] = useState(false);
+  const [couponId, setCouponId] = useState("");
+  const showModal = (e) => {
+    setOpen(true);
+    setCouponId(e);
+  };
+
+  const hideModal = () => {
+    setOpen(false);
+  };
+
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(resetState());
     dispatch(getCoupons());
   }, []);
 
@@ -48,16 +65,31 @@ const CouponList = () => {
       expiry: new Date(couponState[i].expiry).toLocaleString(),
       action: (
         <>
-          <Link className="fs-3 text-danger" to="/">
+          <Link
+            to={`/admin/coupon/${couponState[i]._id}`}
+            className="fs-3 text-danger"
+          >
             <BiEdit />
           </Link>
-          <Link className="ms-3 fs-3 text-danger" to="/">
+          <button
+            onClick={() => showModal(couponState[i]._id)}
+            className="ms-3 fs-3 text-danger border-0 bg-transparent"
+          >
             <AiFillDelete />
-          </Link>
+          </button>
         </>
       ),
     });
   }
+
+  const deleteACoupon = (e) => {
+    dispatch(deleteCoupon(e));
+    setOpen(false);
+
+    setTimeout(() => {
+      dispatch(getCoupons());
+    }, 1000);
+  };
 
   return (
     <div>
@@ -65,9 +97,16 @@ const CouponList = () => {
       <div>
         <Table columns={columns} dataSource={data1} />
       </div>
+      <CustomModal
+        hideModal={hideModal}
+        open={open}
+        performAction={() => {
+          deleteACoupon(couponId);
+        }}
+        title="Are you sure that you want to delete this coupon?"
+      />
     </div>
   );
 };
 
 export default CouponList;
-
