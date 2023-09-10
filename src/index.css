@@ -89,3 +89,8 @@ main::-webkit-scrollbar {
   color: red;
   font-size: 12px;
 }
+
+.ant-select-selection-item-remove {
+  display: inline-flex !important;
+  align-items: center !important;
+}

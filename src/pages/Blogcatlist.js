@@ -19,7 +19,7 @@ const columns = [
   {
     title: "Name",
     dataIndex: "name",
-    sorter: (a, b) => a.name.length - b.name.length,
+    sorter: (a, b) => a.name.localeCompare(b.name),
   },
   {
     title: "Action",
@@ -60,7 +60,7 @@ const Blogcatlist = () => {
             <BiEdit />
           </Link>
           <button
-          onClick={()=>showModal(bCatState[i]._id)}
+            onClick={() => showModal(bCatState[i]._id)}
             className="ms-3 fs-3 text-danger border-0 bg-transparent"
           >
             <AiFillDelete />

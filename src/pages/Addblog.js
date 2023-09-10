@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import CustomInput from "../components/CustomInput";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -30,7 +30,7 @@ const Addblog = () => {
   useEffect(() => {
     if (getBlogID !== undefined) {
       dispatch(getBlog(getBlogID));
-      
+      img.push(blogImages);
     } else dispatch(resetState());
   }, [getBlogID]);
 
@@ -50,6 +50,7 @@ const Addblog = () => {
     blogTitle,
     blogDecs,
     blogCat,
+    blogImages,
     updatedBlog,
   } = newblog;
 
@@ -74,9 +75,9 @@ const Addblog = () => {
     });
   });
 
-  // useEffect(() => {
-  //   formik.values.images = img;
-  // }, [img]);
+  useEffect(() => {
+    formik.values.images = img;
+  }, [blogImages]);
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -84,7 +85,7 @@ const Addblog = () => {
       title: blogTitle || "",
       description: blogDecs || "",
       category: blogCat || "",
-      images: "",
+      images: blogImages || "",
     },
     validationSchema: schema,
     onSubmit: (values) => {
@@ -167,7 +168,7 @@ const Addblog = () => {
               )}
             </Dropzone>
           </div>
-          <div className="showimages d-flex flex-wrap mt-3 gap-3">
+          <div className="showimages d-flex flex-wrap gap-3 mt-3">
             {imgState?.map((i, j) => {
               return (
                 <div className="position-relative" key={j}>

@@ -15,10 +15,13 @@ const columns = [
   {
     title: "Title",
     dataIndex: "name",
+     sorter: (a, b) => a.name.localeCompare(b.name),
   },
   {
     title: "Category",
     dataIndex: "category",
+    sorter: (a, b) => a.category.localeCompare(b.category),
+
   },
   {
     title: "Action",

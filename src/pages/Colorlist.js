@@ -19,7 +19,6 @@ const columns = [
   {
     title: "Name",
     dataIndex: "name",
-    sorter: (a, b) => a.name.length - b.name.length,
   },
   {
     title: "Action",
@@ -50,7 +49,21 @@ const Colorlist = () => {
   for (let i = 0; i < colorState.length; i++) {
     data1.push({
       key: i + 1,
-      name: colorState[i].title,
+      name: (
+        <div style={{ display: 'flex', alignItems: 'center'}}>
+          {colorState[i].title}
+          <div
+            style={{
+              display: 'inline-block',
+              marginLeft: '12px',
+              backgroundColor: `${colorState[i].title}`,
+              width: "20px",
+              height: "20px",
+              borderRadius: "50%",
+            }}
+          />
+        </div>
+      ),
       action: (
         <>
           <Link
