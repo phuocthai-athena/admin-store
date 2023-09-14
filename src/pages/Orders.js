@@ -46,13 +46,14 @@ const Orders = () => {
     data1.push({
       key: i + 1,
       name: orderState[i].orderby.firstname,
-      product: orderState[i].products.map((i, j) => {
-        return (
-          <ul key={j}>
-            <li>{i.product.title}</li>
-          </ul>
-        );
-      }),
+      product: <Link to={`/admin/order/${orderState[i]._id}`}>View Order</Link>,
+      // product: orderState[i].products.map((i, j) => {
+      //   return (
+      //     <ul key={j}>
+      //       <li>{i.product.title}</li>
+      //     </ul>
+      //   );
+      // }),
       amount: orderState[i].paymentIntent.amount,
       date: new Date(orderState[i].createdAt).toLocaleString(),
       action: (
@@ -79,4 +80,3 @@ const Orders = () => {
 };
 
 export default Orders;
-//27

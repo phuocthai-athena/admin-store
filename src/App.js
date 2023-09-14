@@ -24,6 +24,8 @@ import Blogcatlist from "./pages/Blogcatlist";
 import Enquiries from "./pages/Enquiries";
 
 import "./App.css";
+import ViewEnq from "./pages/ViewEnq";
+import ViewOrder from "./pages/ViewOrder";
 
 function App() {
   return (
@@ -48,6 +50,7 @@ function App() {
           <Route path="color/:id" element={<Addcolor />} />
           <Route path="list-color" element={<Colorlist />} />
           <Route path="orders" element={<Orders />} />
+          <Route path="order/:id" element={<ViewOrder />} />
           <Route path="coupon" element={<AddCoupon />} />
           <Route path="coupon/:id" element={<AddCoupon />} />
           <Route path="list-coupon" element={<CouponList />} />
@@ -58,6 +61,7 @@ function App() {
           <Route path="blog-category/:id" element={<Addblogcat />} />
           <Route path="blog-category-list" element={<Blogcatlist />} />
           <Route path="enquiries" element={<Enquiries />} />
+          <Route path="enquiries/:id" element={<ViewEnq />} />
         </Route>
       </Routes>
     </Router>
